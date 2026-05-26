@@ -9,10 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
  
  
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y1775o*2vfltvwy(9sn!cia0ww=0&^a9md!lq&nx&_oj428xhz'
- 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-y1775o*2vfltvwy(9sn!cia0ww=0&^a9md!lq&nx&_oj428xhz')
+
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
  
 ALLOWED_HOSTS = ['*']
  
@@ -96,8 +95,10 @@ USE_I18N = True
 USE_TZ = True
  
  
-# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']    # tells Django where your static folder is
- 
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # add this
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
