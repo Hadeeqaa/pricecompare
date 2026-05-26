@@ -1,14 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>daam.com — results</title>
+  <title>bestprice.com — results</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       min-height: 100vh;
       background: #fde8f0;
@@ -18,7 +25,7 @@
       justify-content: center;
       padding: 20px;
     }
- 
+
     .page {
       width: 420px;
       height: 860px;
@@ -29,7 +36,7 @@
       display: flex;
       flex-direction: column;
     }
- 
+
     .page::before {
       content: '';
       position: absolute;
@@ -42,7 +49,7 @@
       pointer-events: none;
       z-index: 0;
     }
- 
+
     .topbar {
       background: #a8ddd0;
       padding: 10px 14px;
@@ -53,20 +60,37 @@
       z-index: 2;
       flex-shrink: 0;
     }
- 
+
     .topbar-title {
       font-family: 'Fredoka One', cursive;
       font-size: 16px;
       color: #5a3e6b;
       letter-spacing: 1px;
     }
- 
-    .win-dots { display: flex; gap: 6px; }
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .dot-r { background: #f4a0a0; }
-    .dot-y { background: #f4d48a; }
-    .dot-g { background: #a8ddb5; }
- 
+
+    .win-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-r {
+      background: #f4a0a0;
+    }
+
+    .dot-y {
+      background: #f4d48a;
+    }
+
+    .dot-g {
+      background: #a8ddb5;
+    }
+
     .searchbar {
       display: flex;
       align-items: center;
@@ -79,7 +103,7 @@
       z-index: 3;
       flex-shrink: 0;
     }
- 
+
     .searchbar input {
       flex: 1;
       border: none;
@@ -90,9 +114,11 @@
       color: #7a5080;
       background: transparent;
     }
- 
-    .searchbar input::placeholder { color: #c4a0c4; }
- 
+
+    .searchbar input::placeholder {
+      color: #c4a0c4;
+    }
+
     .searchbar button {
       background: #7a5080;
       border: none;
@@ -105,8 +131,11 @@
       color: white;
       font-size: 18px;
     }
-    .searchbar button:hover { background: #5a3060; }
- 
+
+    .searchbar button:hover {
+      background: #5a3060;
+    }
+
     .result-label {
       font-family: 'Fredoka One', cursive;
       font-size: 15px;
@@ -117,7 +146,7 @@
       flex-shrink: 0;
       font-weight: 400;
     }
- 
+
     /* scroll area */
     .scroll-area-wrap {
       flex: 1;
@@ -126,7 +155,7 @@
       margin: 0 4px 10px 14px;
       z-index: 3;
     }
- 
+
     .cards-scroll {
       height: 100%;
       overflow-y: scroll;
@@ -134,8 +163,11 @@
       padding-bottom: 20px;
       scrollbar-width: none;
     }
-    .cards-scroll::-webkit-scrollbar { display: none; }
- 
+
+    .cards-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
     /* custom scrollbar */
     .custom-scrollbar {
       position: absolute;
@@ -148,7 +180,7 @@
       gap: 3px;
       z-index: 5;
     }
- 
+
     .sb-arrow {
       width: 16px;
       height: 18px;
@@ -164,8 +196,11 @@
       color: white;
       font-size: 9px;
     }
-    .sb-arrow:hover { background: #9060a8; }
- 
+
+    .sb-arrow:hover {
+      background: #9060a8;
+    }
+
     .sb-track {
       flex: 1;
       background: #d4b8d8;
@@ -173,7 +208,7 @@
       position: relative;
       cursor: pointer;
     }
- 
+
     .sb-thumb {
       position: absolute;
       left: 0;
@@ -184,18 +219,27 @@
       transition: background 0.15s;
       min-height: 30px;
     }
-    .sb-thumb:hover { background: #7a5ea8; }
-    .sb-thumb:active { cursor: grabbing; }
- 
+
+    .sb-thumb:hover {
+      background: #7a5ea8;
+    }
+
+    .sb-thumb:active {
+      cursor: grabbing;
+    }
+
     /* single card */
     .cards-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 8px;
     }
- 
-    .card-wrap { display: flex; flex-direction: column; }
- 
+
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
     .scallop-card {
       background: #d4b8d8;
       border-radius: 8px 8px 0 0;
@@ -203,27 +247,31 @@
       border: 1.5px solid #c0a0c8;
       border-bottom: none;
     }
- 
+
     .scallop-bottom {
       height: 20px;
       position: relative;
       overflow: hidden;
       margin-bottom: 12px;
     }
+
     .scallop-bottom svg {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
- 
+
     .card-pin {
-      width: 13px; height: 13px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
       border: 2px solid #a880b8;
       background: white;
       margin-bottom: 10px;
     }
- 
+
     /* product image */
     .card-img {
       width: 100%;
@@ -236,13 +284,18 @@
       margin-bottom: 12px;
       overflow: hidden;
     }
+
     .card-img img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
-    .card-img-placeholder { font-size: 36px; color: #c8a0d8; }
- 
+
+    .card-img-placeholder {
+      font-size: 36px;
+      color: #c8a0d8;
+    }
+
     /* product title */
     .card-title {
       font-size: 15px;
@@ -252,7 +305,7 @@
       margin-bottom: 12px;
       line-height: 1.3;
     }
- 
+
     /* divider line */
     .card-divider {
       height: 1.5px;
@@ -261,14 +314,14 @@
       border-radius: 1px;
       margin-bottom: 10px;
     }
- 
+
     /* store rows */
     .store-list-wrap {
       display: flex;
       flex-direction: column;
       gap: 0;
     }
- 
+
     .store-row {
       display: flex;
       justify-content: space-between;
@@ -276,8 +329,11 @@
       padding: 8px 0;
       border-bottom: 1px solid #c8a8d0;
     }
-    .store-row:last-child { border-bottom: none; }
- 
+
+    .store-row:last-child {
+      border-bottom: none;
+    }
+
     .store-name {
       font-family: 'Fredoka One', cursive;
       font-size: 14px;
@@ -285,41 +341,60 @@
       text-decoration: none;
       font-weight: 400;
     }
+
     .store-name:hover {
       text-decoration: underline;
       color: #9060a0;
     }
+
     .store-name.no-link {
       color: #b0a0b0;
       cursor: default;
     }
- 
+
     .store-price {
       font-family: 'Fredoka One', cursive;
       font-size: 14px;
       color: #7a3070;
     }
+
     .store-price.not-found {
       color: #b0a0b0;
       font-size: 12px;
     }
- 
+
     /* stickers */
     .sticker {
       position: absolute;
       z-index: 2;
       pointer-events: none;
     }
- 
-    .loading { text-align: center; padding: 40px 20px; display: none; }
+
+    .loading {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+    }
+
     .loading-text {
       font-family: 'Fredoka One', cursive;
       font-size: 20px;
       color: #9a6080;
       animation: pulse 1.2s ease-in-out infinite;
     }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
- 
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
+
     .error-msg {
       text-align: center;
       padding: 30px 20px;
@@ -330,9 +405,10 @@
     }
   </style>
 </head>
+
 <body>
   <div class="page">
- 
+
     <div class="topbar">
       <span class="topbar-title">daam.com</span>
       <div class="win-dots">
@@ -341,14 +417,14 @@
         <div class="dot dot-g"></div>
       </div>
     </div>
- 
+
     <div class="searchbar">
       <input type="text" id="searchInput" placeholder="search a product..." />
       <button onclick="doSearch()" aria-label="Search">&#128269;</button>
     </div>
- 
+
     <div class="result-label" id="resultLabel"></div>
- 
+
     <!--
       ================================
       STICKERS — PAGE 2
@@ -365,35 +441,35 @@
       mid-left    → style="top:420px; left:4px;    width:55px; transform:rotate(-12deg); z-index:4;"
       ================================
     -->
- 
+
     <!-- STICKER SLOT 1 — top right -->
     <!-- <img src="{% static 'lip.png' %}" class="sticker" style="top:70px;right:8px;width:60px;transform:rotate(15deg);z-index:4;"> -->
- 
+
     <!-- STICKER SLOT 2 — mid right -->
     <img src="{% static 'lip.png' %}" class="sticker"
       style="top:300px;right:6px;width:65px;transform:rotate(-8deg);z-index:4;">
- 
+
     <!-- STICKER SLOT 3 — bottom right -->
     <img src="{% static 'cream.png' %}" class="sticker"
       style="bottom:50px;right:8px;width:60px;transform:rotate(5deg);z-index:4;">
- 
+
     <!-- STICKER SLOT 4 — mid left -->
     <img src="{% static 'mask.png' %}" class="sticker"
       style="top:180px;left:4px;width:55px;transform:rotate(-8deg);z-index:4;">
- 
+
     <div class="loading" id="loading">
       <p class="loading-text">searching all stores...</p>
     </div>
- 
+
     <div class="error-msg" id="errorMsg">
       oops! something went wrong. try again?
     </div>
- 
+
     <div class="scroll-area-wrap">
       <div class="cards-scroll" id="cardsScroll">
         <div class="cards-grid" id="cardsGrid"></div>
       </div>
- 
+
       <div class="custom-scrollbar">
         <div class="sb-arrow" id="sbUp">&#9650;</div>
         <div class="sb-track" id="sbTrack">
@@ -402,9 +478,9 @@
         <div class="sb-arrow" id="sbDown">&#9660;</div>
       </div>
     </div>
- 
+
   </div>
- 
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const query = params.get('q') || '';
@@ -418,23 +494,23 @@
     const sbTrack = document.getElementById('sbTrack');
     const sbUp = document.getElementById('sbUp');
     const sbDown = document.getElementById('sbDown');
- 
+
     searchInput.value = query;
     if (query) {
       resultLabel.textContent = `results for: "${query}"`;
       fetchResults(query);
     }
- 
+
     function doSearch() {
       const q = searchInput.value.trim();
       if (!q) return;
       window.location.href = `/results/?q=${encodeURIComponent(q)}`;
     }
- 
+
     searchInput.addEventListener('keydown', e => {
       if (e.key === 'Enter') doSearch();
     });
- 
+
     // scrollbar
     function updateScrollbar() {
       const el = cardsScroll;
@@ -450,20 +526,20 @@
       sbThumb.style.height = thumbH + 'px';
       sbThumb.style.top = thumbTop + 'px';
     }
- 
+
     cardsScroll.addEventListener('scroll', updateScrollbar);
     sbUp.addEventListener('click', () => cardsScroll.scrollBy({ top: -140, behavior: 'smooth' }));
     sbDown.addEventListener('click', () => cardsScroll.scrollBy({ top: 140, behavior: 'smooth' }));
- 
+
     let dragging = false, dragStartY = 0, dragStartScroll = 0;
- 
+
     sbThumb.addEventListener('mousedown', e => {
       dragging = true;
       dragStartY = e.clientY;
       dragStartScroll = cardsScroll.scrollTop;
       e.preventDefault();
     });
- 
+
     document.addEventListener('mousemove', e => {
       if (!dragging) return;
       const trackH = sbTrack.clientHeight;
@@ -472,9 +548,9 @@
       const ratio = scrollable / (trackH - thumbH);
       cardsScroll.scrollTop = dragStartScroll + (e.clientY - dragStartY) * ratio;
     });
- 
+
     document.addEventListener('mouseup', () => { dragging = false; });
- 
+
     sbTrack.addEventListener('click', e => {
       if (e.target === sbThumb) return;
       const rect = sbTrack.getBoundingClientRect();
@@ -482,29 +558,29 @@
       const scrollable = cardsScroll.scrollHeight - cardsScroll.clientHeight;
       cardsScroll.scrollTop = ratio * scrollable;
     });
- 
+
     // fetch from django
     function fetchResults(q) {
       loading.style.display = 'block';
       errorMsg.style.display = 'none';
- 
+
       fetch(`/api/search/?q=${encodeURIComponent(q)}`)
         .then(res => { if (!res.ok) throw new Error('bad'); return res.json(); })
         .then(data => { loading.style.display = 'none'; renderCards(data); })
         .catch(() => { loading.style.display = 'none'; errorMsg.style.display = 'block'; });
     }
- 
+
     function scallopSVG() {
       return `<svg viewBox="0 0 200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 0 Q10 20 20 0 Q30 20 40 0 Q50 20 60 0 Q70 20 80 0 Q90 20 100 0 Q110 20 120 0 Q130 20 140 0 Q150 20 160 0 Q170 20 180 0 Q190 20 200 0 L200 20 L0 20 Z" fill="#d4b8d8"/>
         <path d="M0 0 Q10 18 20 0 Q30 18 40 0 Q50 18 60 0 Q70 18 80 0 Q90 18 100 0 Q110 18 120 0 Q130 18 140 0 Q150 18 160 0 Q170 18 180 0 Q190 18 200 0" fill="none" stroke="#e8d8b0" stroke-width="2"/>
       </svg>`;
     }
- 
+
     // build single card with all store rows
     function renderCards(data) {
       cardsGrid.innerHTML = '';
- 
+
       const storeRows = data.results.map(item => {
         if (!item.found) {
           return `
@@ -519,11 +595,11 @@
             <span class="store-price">${item.price || 'see site'}</span>
           </div>`;
       }).join('');
- 
+
       const imgHtml = data.image
         ? `<img src="${data.image}" alt="${data.title || ''}">`
         : `<span class="card-img-placeholder">&#128247;</span>`;
- 
+
       const card = document.createElement('div');
       card.className = 'card-wrap';
       card.innerHTML = `
@@ -536,10 +612,11 @@
         </div>
         <div class="scallop-bottom">${scallopSVG()}</div>
       `;
- 
+
       cardsGrid.appendChild(card);
       setTimeout(updateScrollbar, 50);
     }
   </script>
 </body>
+
 </html>
