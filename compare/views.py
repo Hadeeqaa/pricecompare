@@ -19,6 +19,25 @@ STORES = {
     'myntra.com': 'Myntra',
 }
 
+def get_product_image(query, api_key):
+    try:
+        params = {
+            'engine': 'google_images',
+            'q': query,
+            'api_key': api_key,
+            'gl': 'in',
+            'hl': 'en',
+            'num': 1,
+        }
+        response = requests.get('https://serpapi.com/search', params=params)
+        data = response.json()
+        images = data.get('images_results', [])
+        if images:
+            return images[0].get('thumbnail', '')
+    except:
+        pass
+    return ''
+
 @api_view(['GET'])
 def search_products(request):
     query = request.GET.get('q', '')
@@ -59,7 +78,7 @@ def search_products(request):
                     elif price:
                         price_display = f"₹{int(price)}"
                     else:
-                        price_display = f"off sale"
+                        price_display = "off sale"
 
                     results.append({
                         'store': store_name,
@@ -78,19 +97,13 @@ def search_products(request):
         except Exception as e:
             results.append({'store': store_name, 'found': False})
 
-    # this block is OUTSIDE the for loop — runs after all stores are done
-    product_image = ''
     product_title = ''
     for r in results:
-        if r.get('found') and r.get('image'):
-            product_image = r['image']
+        if r.get('found') and r.get('title'):
             product_title = r['title']
             break
-    if not product_title:
-        for r in results:
-            if r.get('found') and r.get('title'):
-                best_title = r['title']
-                break
+
+    product_image = get_product_image(query, api_key)
 
     return Response({
         'product': query,
