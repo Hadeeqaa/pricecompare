@@ -1,0 +1,410 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>daam.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #fde8f0;
+      font-family: 'Fredoka One', cursive;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .page {
+      width: 420px;
+      min-height: 860px;
+      background: #f5c6d8;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(#e8a0bc 1px, transparent 1px),
+        linear-gradient(90deg, #e8a0bc 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .topbar {
+      background: #a8ddd0;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 28px;
+      color: #5a3e6b;
+      letter-spacing: 3px;
+    }
+
+    .win-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+
+    .dot-r {
+      background: #f4a0a0;
+    }
+
+    .dot-y {
+      background: #f4d48a;
+    }
+
+    .dot-g {
+      background: #a8ddb5;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 20px 18px 40px;
+    }
+
+    /* all stickers share this class — position controlled inline */
+    .sticker {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .browser {
+      background: #fdf0f5;
+      border: 2px solid #c9a0c0;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      z-index: 3;
+    }
+
+    .browser-bar {
+      background: #c5e8e0;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .browser-bar-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .b-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d4b0c8;
+    }
+
+    .browser-url {
+      flex: 1;
+      background: white;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: #9a7090;
+      font-family: 'Fredoka One', cursive;
+    }
+
+    .browser-body {
+      padding: 18px 16px;
+    }
+
+    .browser-tagline {
+      font-family: 'Fredoka One', cursive;
+      font-size: 18px;
+      color: #9a6080;
+      line-height: 1.4;
+      margin-bottom: 14px;
+      font-weight: 400;
+    }
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 2px solid #c9a0c0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .search-wrap input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 11px 14px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 15px;
+      color: #7a5080;
+      background: transparent;
+    }
+
+    .search-wrap input::placeholder {
+      color: #c4a0c4;
+    }
+
+    .search-btn {
+      background: #9b7ec8;
+      border: none;
+      padding: 8px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .search-btn:hover {
+      background: #ffbaed;
+    }
+
+    .search-btn img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .store-browser-wrap {
+      position: relative;
+      margin-top: 20px;
+      margin-left: auto;
+      width: 82%;
+    }
+
+    .store-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .store-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid #e8c8dc;
+      color: #7a5080;
+      font-family: 'Fredoka One', cursive;
+      font-size: 17px;
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .store-list li:last-child {
+      border-bottom: none;
+    }
+
+    .fake-scroll {
+      position: absolute;
+      right: -18px;
+      top: 0;
+      bottom: 0;
+      width: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sb-arrow {
+      width: 14px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .sb-arrow img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+
+    .sb-track {
+      flex: 1;
+      background: #e8d0e0;
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .sb-thumb {
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      height: 30%;
+      background: #c9a0c0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <div class="topbar">
+      <span class="logo">daam.com</span>
+      <div class="win-dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!--
+        ================================
+        STICKERS — PAGE 1
+        ================================
+        To add a sticker, paste an <img> tag like this anywhere in .content:
+ 
+        <img src="stickers/YOUR_IMAGE.png" class="sticker" style="
+          top: 10px;       (distance from top — use top OR bottom)
+          bottom: 200px;   (distance from bottom)
+          left: 5px;       (distance from left — use left OR right)
+          right: 20px;     (distance from right)
+          width: 90px;     (size of sticker)
+          transform: rotate(-20deg);  (tilt: negative = left, positive = right)
+        ">
+ 
+        SUGGESTED SPOTS:
+        top-left corner      → top:10px;  left:5px;   width:90px; rotate(-20deg)
+        top-right corner     → top:10px;  right:20px; width:80px; rotate(10deg)
+        middle-left          → top:340px; left:5px;   width:85px; rotate(-5deg)
+        middle-right         → top:320px; right:10px; width:75px; rotate(8deg)
+        bottom-left          → bottom:200px; left:5px;  width:90px; rotate(5deg)
+        bottom-right         → bottom:180px; right:10px; width:70px; rotate(-10deg)
+        sparkle/small accent → bottom:140px; left:65px; width:55px;
+        ================================
+      -->
+
+      <!-- STICKER SLOT 2 — top right -->
+      <img src="{% static 'lip.png' %}" class="sticker" style="top:10px;right:20px;width:80px;transform:rotate(10deg)">
+
+      <!-- STICKER SLOT 3 — middle left -->
+      <!-- <img src="stickers/roller.png" class="sticker" style="top:340px;left:5px;width:85px;transform:rotate(-5deg)"> -->
+
+      <!-- STICKER SLOT 4 — bottom left -->
+      <img src="{% static 'mask.png' %}" class="sticker"
+        style="bottom:200px;left:5px;width:90px;transform:rotate(5deg)">
+
+      <!-- STICKER SLOT 5 — bottom right -->
+      <img src="{% static 'cream.png' %}" class="sticker"
+        style="bottom:180px;right:10px;width:70px;transform:rotate(-10deg)">
+
+      <!-- STICKER SLOT 6 — small sparkle/accent -->
+      <!-- <img src="stickers/sparkle.png" class="sticker" style="bottom:140px;left:65px;width:55px"> -->
+
+      <!-- STICKER SLOT 7 — anywhere extra you want -->
+      <!-- <img src="stickers/flowers.png" class="sticker" style="top:230px;right:8px;width:65px;transform:rotate(5deg)"> -->
+
+      <!-- main search browser window -->
+      <div class="browser" style="margin-top:20px;">
+        <div class="browser-bar">
+          <div class="browser-bar-dots">
+            <div class="b-dot"></div>
+            <div class="b-dot"></div>
+            <div class="b-dot"></div>
+          </div>
+          <div class="browser-url">daam.com</div>
+          <span style="font-size:13px;color:#5a7a72;">≡</span>
+        </div>
+        <div class="browser-body">
+          <p class="browser-tagline">get the best price of a product<br>in 0.1 sec..</p>
+          <div class="search-wrap">
+            <input type="text" id="searchInput" placeholder="search a product..." />
+            <button class="search-btn" onclick="goSearch()" aria-label="Search">
+              <!--
+                SEARCH BUTTON ICON:
+                replace the emoji below with your image:
+                <img src="stickers/search-icon.png">
+              -->
+              &#128269;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- store list browser window -->
+      <div class="store-browser-wrap">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="browser-bar-dots">
+              <div class="b-dot"></div>
+              <div class="b-dot"></div>
+              <div class="b-dot"></div>
+            </div>
+            <div class="browser-url"></div>
+            <span style="font-size:13px;color:#5a7a72;">≡</span>
+          </div>
+          <div class="browser-body">
+            <p
+              style="font-family:'Fredoka One',cursive;font-size:15px;color:#9a6080;margin-bottom:10px;font-weight:400;">
+              all the websites that are compared</p>
+            <ul class="store-list">
+              <li>nykaa</li>
+              <li>amazon</li>
+              <li>tirabeauty</li>
+              <li>meesho</li>
+              <li>myntra</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fake-scroll">
+          <div class="sb-arrow">&#9650;</div>
+          <div class="sb-track">
+            <div class="sb-thumb"></div>
+          </div>
+          <div class="sb-arrow">&#9660;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function goSearch() {
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) return;
+      window.location.href = `/results/?q=${encodeURIComponent(query)}`;
+    }
+    document.getElementById('searchInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') goSearch();
+    });
+  </script>
+</body>
+
+</html>
