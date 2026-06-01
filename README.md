@@ -1,8 +1,8 @@
-# Daam.com
+# Price Compare
 Price comparision tool that shows user price of a product from different websites
 
 ## Demo
-GIF or screenshot here. (This alone makes it look 10x better)
+soon~
 
 ## Features
 - User can skim the price of a product present across different websites
@@ -15,7 +15,7 @@ GIF or screenshot here. (This alone makes it look 10x better)
 
 ## Getting Started
 # clone it
-git clone https://github.com/you/project
+git clone https://github.com/Hadiqaaaa/pricecompare
 
 # install
 npm install 
