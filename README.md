@@ -1,17 +1,31 @@
-#Price Compare 
-##About 
-A price comparison tool that helps consumers 
-quickly compare a products price without having 
-to jump through different websites 
-##Usage
-A simple tool that uses serp api to go through 
-websites for the products 
-##Installation 
-Python 
-Django
-Env
-Serp api key
-##Later Modifications 
-Letting users select gl  -> currency
+# Daam.com
+Price comparision tool that shows user price of a product from different websites
 
+## Demo
+GIF or screenshot here. (This alone makes it look 10x better)
 
+## Features
+- User can skim the price of a product present across different websites
+- any product can be searched 
+- Searches across popular websites 
+
+## Tech Stack
+- Frontend: html,css,js
+- Backend: Django,SerpAPI
+
+## Getting Started
+# clone it
+git clone https://github.com/you/project
+
+# install
+npm install 
+
+# run
+npm run dev
+
+## Modifications
+Letting user select a gl and websites 
+
+### How It Works (optional)
+- SERPAPI lets one search any engine and get data without the effort of creating database in this case 
+-extremely handy to move with DRF 
