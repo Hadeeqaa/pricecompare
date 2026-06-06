@@ -1,31 +1,42 @@
-# Price Compare
-Price comparision tool that shows user price of a product from different websites
+# Daam
 
-## Demo
-soon~
+A *product price comparison tool* that searches across popular Indian beauty and shopping websites in real time.
+
+## Live Demo
+https://daam-mqjd.onrender.com
 
 ## Features
-- User can skim the price of a product present across different websites
-- any product can be searched 
-- Searches across popular websites 
+- Search any product and compare prices across Nykaa, Amazon, Tira, Purplle, Meesho and Myntra
+- Real time results powered by SerpAPI
+- Clean results showing price, title and direct link to product
 
 ## Tech Stack
-- Frontend: html,css,js
-- Backend: Django,SerpAPI
+- **Backend:** Django, Django REST Framework
+- **API:** SerpAPI (Google Shopping)
+- **Frontend:** HTML, CSS, JavaScript
+- **Deployment:** Render
 
 ## Getting Started
-# clone it
+
+```bash
 git clone https://github.com/Hadiqaaaa/pricecompare
+cd pricecompare
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
-# install
-npm install 
+Create a `.env` file:
+```
+SECRET_KEY=your-secret-key
+SERPAPI_KEY=your-serpapi-key
+DEBUG=True
+```
 
-# run
-npm run dev
+```bash
+python manage.py runserver
+```
 
-## Modifications
-Letting user select a gl and websites 
-
-### How It Works (optional)
-- SERPAPI lets one search any engine and get data without the effort of creating database in this case 
--extremely handy to move with DRF 
+## Planned Improvements
+- Let users filter by region and select specific websites
+- Add price history tracking
