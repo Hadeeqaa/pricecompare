@@ -7,11 +7,9 @@ a product price comparsion tool that lets user compare price of a product across
 https://daam-mqjd.onrender.com/
 
 ## Features 
--get a list of prices of a product across multiple websites with the product
-
--links to the product on those websites
-
--any product from amazon.in,nykaa,tira beauty,myntra and meesho can be searched
+- get a list of prices of a product across multiple websites with the product
+- links to the product on those websites
+- any product from amazon.in,nykaa,tira beauty,myntra and meesho can be searched
 
 ## Tech Stack
 - frontend:html,css
