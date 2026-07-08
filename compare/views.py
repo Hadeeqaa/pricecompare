@@ -11,12 +11,12 @@ def results(request):
     return render(request, 'results.html')
 
 STORES = {
-    'nykaa.com': 'Nykaa',
-    'amazon.in': 'Amazon',
-    'tirabeauty.com': 'Tira',
-    'purplle.com': 'Purplle',
-    'meesho.com': 'Meesho',
-    'myntra.com': 'Myntra',
+    'mecca.com.au': 'Mecca',
+    'amazon.com.au': 'Amazon',
+    'woolworths.com.au': 'woolworths',
+    'chemistwarehouse.com.au': 'chemistwarehouse',
+    'ebay.com.au': 'eBay',
+    'kmart.com.au': 'Kmart',
 }
 
 def get_product_image(query, api_key):
@@ -52,7 +52,7 @@ def search_products(request):
             'engine': 'google',
             'q': f'{query} site:{domain}',
             'api_key': api_key,
-            'gl': 'in',
+            'gl': 'au',
             'hl': 'en',
             'num': 3,
         }
@@ -74,9 +74,9 @@ def search_products(request):
                     price = extensions.get('price')
 
                     if price_from:
-                        price_display = f"₹{int(price_from)} – ₹{int(price_to)}"
+                        price_display = f"${int(price_from)} – ${int(price_to)}"
                     elif price:
-                        price_display = f"₹{int(price)}"
+                        price_display = f"${int(price)}"
                     else:
                         price_display = "off sale"
 
