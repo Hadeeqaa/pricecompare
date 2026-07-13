@@ -1,5 +1,5 @@
 
-# Priced
+# daam
 a product price comparsion tool that lets user compare price of a product across websites
 
 ## Link
