@@ -1,5 +1,5 @@
 
-# Daam
+# Priced
 a product price comparsion tool that lets user compare price of a product across websites
 
 ## Link
@@ -9,7 +9,7 @@ https://daam-mqjd.onrender.com/
 ## Features 
 - get a list of prices of a product across multiple websites with the product
 - links to the product on those websites
-- any product from amazon.in,nykaa,tira beauty,myntra and meesho can be searched
+- any product from mecca,amazon,woolworths,chemistwarehouse,ebay,Kmart can be searched
 
 ## Tech Stack
 - frontend:html,css
